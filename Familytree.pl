@@ -47,3 +47,24 @@ female(Grandmother),parent(Grandchild,Parent),parent(Parent,Grandmother).
 
 grandfather(Grandchild,Grandfather):-
 male(Grandfather),parent(Grandchild,Parent),parent(Parent,Grandfather).
+
+nephew(Nephew, UncleAunt) :-
+    male(Nephew),
+    parent(Nephew, Parent),
+    sibling(Parent, Sibling),
+    (male(Sibling); female(Sibling)),
+    parent(UncleAunt, Sibling).
+
+niece(Niece, UncleAunt) :-
+    female(Niece),
+    parent(Niece, Parent),
+    sibling(Parent, Sibling),
+    (male(Sibling); female(Sibling)),
+    parent(UncleAunt, Sibling).
+
+cousin(Cousin, Person) :-
+    parent(Cousin, ParentCousin),
+    parent(Person, ParentPerson),
+    sibling(ParentCousin, ParentPerson),
+    Cousin \= Person.
+
